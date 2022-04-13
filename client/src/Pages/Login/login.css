@@ -1,0 +1,207 @@
+#home {
+  background-image: url(../../Source/img/bg-svg-f.svg);
+  background-size: cover;
+  background-color: #ffffff;
+}
+.authfy-login .authfy-panel {
+  padding: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease;
+  opacity: 0;
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+}
+.authfy-login {
+  height: 600px;
+  margin: 40px auto 25px;
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f6f6f7;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(158, 158, 158, 0.12);
+  border-radius: 8px;
+}
+
+.authfy-panel .authfy-heading {
+  margin-bottom: 50px;
+}
+.authfy-login .auth-title {
+  font-weight: 700;
+  margin-top: 0px;
+}
+.authfy-login .authfy-panel.active {
+  opacity: 1;
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+.creat_link {
+  color: #fe8402;
+}
+.creat_link {
+  color: #fe8402;
+  opacity: 0.9;
+}
+.authfy-login .loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #aaa;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.authfy-login .loginOr .hrOr {
+  background-color: #cdcdcd;
+  height: 1px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+.authfy-login .loginOr .spanOr {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -0.75em;
+  margin-left: -1.5em;
+  background-color: white;
+  width: 3em;
+  text-align: center;
+}
+.panel-login .remember-row {
+  margin-bottom: 10px;
+}
+
+.panel-login .remember-row label {
+  font-weight: normal;
+  position: relative;
+  cursor: pointer;
+  color: #666;
+  padding-left: 24px;
+}
+.panel-login .form-control {
+  color: #333333;
+  font-size: 16px;
+  height: 50px;
+  padding: 12px;
+  outline: none;
+  border: 0 none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.panel-login .form-control:focus + .focus-input:before {
+  width: 100%;
+}
+.wrap-input {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid #d9d9d9;
+}
+.focus-input {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+.focus-input:before {
+  background-color: #fe8402;
+  content: '';
+  width: 0;
+  height: 2px;
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.pwdMask {
+  position: relative;
+}
+
+.pwdMask .pwd-toggle {
+  color: #cccccc;
+  position: absolute;
+  z-index: 2;
+}
+.pwdMask .pwd-toggle:hover,
+.pwdMask .pwd-toggle:focus {
+  cursor: pointer;
+}
+
+.pwdMask .pwd-toggle:hover,
+.pwdMask .pwd-toggle:focus,
+.pwdMask .pwd-toggle.fa-eye {
+  color: #fe8402;
+}
+.small-text {
+  color: #fe8303;
+  font-size: 14px;
+}
+.padd-text {
+  padding-top: 100px;
+}
+.fadeInLeft {
+  animation-name: fadeInLeft;
+}
+.title-h2 {
+  font-size: 45px;
+  color: #4b456f;
+  line-height: 52px;
+  font-weight: 600;
+}
+p.font-p {
+  color: #656565;
+  font-size: 15px;
+  line-height: 28px;
+  margin-top: 20px;
+}
+.mg-bt-30 {
+  margin-bottom: 30px;
+}
+.btn-blue {
+  color: #fff !important;
+  background-color: #fe8402;
+  border: none;
+  font-size: 15px;
+  line-height: 25px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  padding: 8px 25px !important;
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .hero-padd {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+.btn {
+  margin-top: 20px;
+  border-radius: 0;
+  padding: 5px 75px;
+}
+.btn-primary {
+  background-color: #fe8402;
+  border-color: #fe8402;
+  border-radius: 4px !important;
+}
