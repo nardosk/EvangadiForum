@@ -2,29 +2,28 @@ import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import QuestionDetail from "../Question/QuestionDetail";
-import axios from "axios";
+import Axios from "../../Axios";
 
 const Home = ({ logout }) => {
   const [userData, setUserData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
+  const axios = Axios();
 
   useEffect(() => {
-    if (!userData.user) navigate("/login");
-    else loadQuestions();
-  }, [userData.user, navigate]);
+    if (!userData.user) {
+      navigate("/login");
+    } else {
+      loadQuestions();
+    }
+  }, [userData.user]);
 
   async function loadQuestions() {
     const response = await axios.get(
-      "http://localhost:3001/api/question/getquestions",
-      {
-        headers: { "x-auth-token": userData.token },
-      }
+      "/api/question/getquestions",
+      userData.config
     );
-    console.log(response.data.data);
     setQuestions(response.data?.data);
-    console.log(response.data.data);
-    console.log(questions);
   }
 
   const handleClick = () => {

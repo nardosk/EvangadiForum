@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
-import axios from "axios";
+import Axios from "../../Axios";
 import AnswerDetail from "./AnswerDetail";
 import "./Answer.css";
 
@@ -11,46 +11,60 @@ function Answer() {
   const [question, setQuestion] = useState(useParams());
   const [userData, setUserData] = useContext(UserContext);
   const [answers, setAnswers] = useState([]);
-  const navigate = useNavigate();
+  const axios = Axios();
+
+  const [form, setForm] = useState({});
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      //sending user data to database to be logged in
+      const postRes = await axios.post(
+        "/api/answer/newanswer",
+        {
+          answer: form.new_answer,
+          question_id: id,
+        },
+        userData.config
+      );
+      setAnswers((answers) => [
+        ...answers,
+        {
+          answer: form.new_answer,
+          time: new Date(),
+          user_id: question.user_id,
+          user_name: userData.user.display_name,
+          answer_id: postRes.data.insertId,
+        },
+      ]);
+    } catch (err) {
+      console.log("problem", err.response.data.msg);
+      alert(err.response.data.msg);
+    }
+  };
 
   useEffect(() => {
     loadQuestion();
     loadAnswers();
-  }, []);
+  }, [userData.user]);
 
   async function loadQuestion() {
     const response = await axios.get(
-      "http://localhost:3001/api/question/getquestions",
-      {
-        headers: { "x-auth-token": userData.token },
-      }
+      `/api/question/getquestionbyid?question_id=${id}`,
+      userData.config
     );
-    console.log(response.data.data);
-    const quests = response.data?.data;
-    if (quests) {
-      const currQuest = quests.find(
-        (quest) => quest.question_id === parseInt(id)
-      );
-      setQuestion(currQuest);
-    }
+    console.log(response.data?.data);
+    setQuestion(response.data?.data);
   }
 
-  useEffect(() => {
-    if (!userData.user) navigate("/login");
-  }, [userData.user, navigate]);
-
   async function loadAnswers() {
-    console.log(question);
     const response = await axios.get(
-      "http://localhost:3001/api/answer/getanswer?question_id=" + id,
-      {
-        headers: { "x-auth-token": userData.token },
-      }
+      `/api/answer/getanswer?question_id=${id}`,
+      userData.config
     );
-    console.log(response.data.data);
     setAnswers(response.data?.data);
-    console.log(response.data.data);
-    console.log(answers);
   }
   return (
     <section className="container">
@@ -68,6 +82,7 @@ function Answer() {
             return <AnswerDetail answer={value} key={index} />;
           })}
         </div>
+        <div></div>
         <div style={{ width: "100%", display: "inline-block" }}>
           <div style={{ textAlign: "center" }}>
             <h2 style={{ paddingTop: "100px" }}>Answer The Top Question</h2>
@@ -75,8 +90,8 @@ function Answer() {
               Go to Question Page
             </Link>
           </div>
-          <form action="/newanswer" method="post">
-            <div>
+          <form method="post" onSubmit={handleSubmit}>
+            <div style={{ width: "90%" }}>
               <div>
                 <input
                   style={{
@@ -87,6 +102,7 @@ function Answer() {
                   type="text"
                   name="new_answer"
                   placeholder="Your Answer . . . "
+                  onChange={handleChange}
                 />
               </div>
               <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>

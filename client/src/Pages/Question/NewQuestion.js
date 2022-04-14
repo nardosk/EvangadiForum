@@ -1,6 +1,6 @@
 import React from "react";
 import "./question.css";
-const Question = () => {
+const NewQuestion = () => {
   return (
     <section className="container">
       <div className="header_row">
@@ -13,13 +13,12 @@ const Question = () => {
           <div className="question_user">pic</div>
           <spam>name</spam>
         </div>
-        <div onClick="handleClick">
-          <div className="question_title">java</div>
-          <div className="question_arrow">arr</div>
-        </div>
+
+        <div className="question_title">java</div>
+        <div className="question_arrow">arr</div>
       </div>
     </section>
   );
 };
 
-export default Question;
+export default NewQuestion;

@@ -1,7 +1,9 @@
 import axios from "axios";
 
-export default () => {
+const Axios = () => {
   return axios.create({
-    baseURL: `http://localhost:3001/`, // the url of our server
+    baseURL: "http://localhost:3001/", // the url of our server
   });
 };
+
+export default Axios;

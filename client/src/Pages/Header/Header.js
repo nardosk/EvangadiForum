@@ -51,7 +51,8 @@ const Header = ({ logout }) => {
                   <a
                     className="lnk-toggler btn btn-blue"
                     data-panel=".panel-login"
-                    href="#"
+                    href="/"
+                    onClick={logout}
                   >
                     {userData.user ? `Log Out` : `Sign In`}
                   </a>

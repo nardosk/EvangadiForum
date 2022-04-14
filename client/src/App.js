@@ -1,4 +1,4 @@
-import axios from "axios";
+import Axios from "./Axios";
 import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -7,23 +7,24 @@ import { UserContext } from "./context/UserContext";
 import Home from "./Pages/Home/Home";
 import Header from "./Pages/Header/Header";
 import Footer from "./Pages/Footer/Footer";
-import Login from "./Pages/Login/Login";
-import Question from "./Pages/Question/Question";
+// import Footer from "./Pages/Footer/FooterMain";
+import Login from "./Pages/SignIn/SignIn";
+import NewQuestion from "./Pages/Question/NewQuestion";
 import Answer from "./Pages/Answer/Answer";
-import SignUp from "./Pages/SignUp/SignUp";
 function App() {
   const [userData, setUserData] = useContext(UserContext);
+  const axios = Axios();
 
   const checkLoggedIn = async () => {
     //check if token already exists in localStorage
     let token = localStorage.getItem("auth-token");
-    if (token === null) {
+    if (token === null || token === "") {
       //token not in localStorage then set auth token empty
       localStorage.setItem("auth-token", "");
       token = "";
     } else {
       //if token exists in localStorage then use auth to verify token and get user info
-      const userRes = await axios.get("http://localhost:3001/api/users", {
+      const userRes = await axios.get("/api/users", {
         headers: { "x-auth-token": token },
       });
 
@@ -33,6 +34,9 @@ function App() {
         user: {
           id: userRes.data.data.user_id,
           display_name: userRes.data.data.user_name,
+        },
+        config: {
+          headers: { "x-auth-token": token },
         },
       });
     }
@@ -58,8 +62,7 @@ function App() {
         <Header logout={logout} />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/newquestion" element={<Question />} />
+          <Route path="/newquestion" element={<NewQuestion />} />
           <Route path="/answer/:id" element={<Answer />} />
 
           {/* passing logout function as props to Home page */}

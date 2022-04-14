@@ -2,16 +2,15 @@ const { newAnswer, getAnswerByQuestId } = require("./answer.service");
 
 module.exports = {
   newAnswer: (req, res) => {
-    const { user_id, question_id, answer, time } = req.body;
-
+    const { question_id, answer } = req.body;
     //validation
-    if (!user_id || !question_id || !answer || !time)
+    if (!question_id || !answer)
       return res
         .status(400)
         .json({ msg: "Not all fields have been provided!" });
 
     //sending data to profile with the user_id included in req.body
-    newAnswer(req.body, (err, results) => {
+    newAnswer(req, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ msg: "database connection err" });
@@ -23,7 +22,6 @@ module.exports = {
     });
   },
   getAnswerByQuestId: (req, res) => {
-    console.log(req.query.question_id);
     getAnswerByQuestId(req.query.question_id, (err, results) => {
       if (err) {
         console.log(err);

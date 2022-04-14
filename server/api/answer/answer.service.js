@@ -7,7 +7,7 @@ module.exports = {
     pool.query(
       `INSERT INTO answer(user_id, question_id, answer,time )VALUES(?,?,?,?)`,
       // ? it is hold  it help sql injections
-      [data.user_id, data.question_id, data.answer, data.time],
+      [data.id, data.body.question_id, data.body.answer, new Date()],
       (err, result) => {
         if (err) {
           return callback(err);
@@ -19,7 +19,7 @@ module.exports = {
   getAnswerByQuestId: (question_id, callback) => {
     //getting the question list by question_id
     pool.query(
-      `SELECT * FROM answer WHERE question_id = ?`,
+      `SELECT answer.answer_id, answer.question_id, answer.user_id, registration.user_name, answer.answer, answer.time FROM answer LEFT OUTER JOIN registration ON registration.user_id = answer.user_id WHERE answer.question_id = ?`,
       [question_id],
       (err, result) => {
         if (err) {

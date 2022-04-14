@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const { newAnswer, getAnswerByQuestId } = require("./answer.controller");
 
 //route new user to be registered using createUser controller
-router.post("/newanswer", newAnswer);
+router.post("/newanswer", auth, newAnswer);
 
 //route new user to be registered using createUser controller
 router.get("/getanswer", auth, getAnswerByQuestId);
