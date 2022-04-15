@@ -15,12 +15,17 @@
   justify-content: space-between;
 }
 .header_question {
-  border-top: 2px solid gray;
+  border: 0.01px solid lightgray;
+  border-radius: 5px;
   margin-bottom: 10px;
   color: normal;
   display: flex;
-  height: 140px;
   justify-content: space-between;
+}
+.question_user {
+  display: inline-block;
+  width: 12%;
+  align-items: center;
 }
 .question_title {
   display: flex;
@@ -30,16 +35,8 @@
   margin: auto;
   justify-content: space-between;
 }
-.question_user {
-  display: inline-block;
-  margin-top: 20px;
-  width: 140px;
-  height: 122px;
-  align-items: center;
-}
 .question_arrow {
   content: "\f105";
-  height: 100%;
 }
 .fa-angle-right:before {
   content: "\f105";

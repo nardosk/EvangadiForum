@@ -7,7 +7,7 @@ module.exports = {
     pool.query(
       `INSERT INTO question(user_id, title, question,time )VALUES(?,?,?,?)`,
       // ? it is hold  it help sql injections
-      [data.user_id, data.title, data.question, data.time],
+      [data.id, data.body.title, data.body.question, new Date()],
       (err, result) => {
         if (err) {
           return callback(err);

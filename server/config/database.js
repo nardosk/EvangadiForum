@@ -29,8 +29,8 @@ let profile = `CREATE TABLE if not exists profile(
 let question = `CREATE TABLE if not exists question(
     question_id int auto_increment,
     user_id int not null,
-    title varchar(255) not null,
-    question varchar(255) not null,
+    title varchar(200) not null,
+    question varchar(65535) not null,
     time DateTime not null,        
     PRIMARY KEY (question_id),
     FOREIGN KEY (user_id) REFERENCES registration(user_id)
@@ -39,8 +39,8 @@ let answer = `CREATE TABLE if not exists answer(
     answer_id int auto_increment,
     user_id int not null,
     question_id int not null,
-    answer varchar(255) not null,
-     time DateTime not null,        
+    answer varchar(65535) not null,
+    time DateTime not null,        
     PRIMARY KEY (answer_id),
     FOREIGN KEY (user_id) REFERENCES registration(user_id),
      FOREIGN KEY (question_id) REFERENCES question(question_id)

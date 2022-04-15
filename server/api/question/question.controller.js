@@ -6,10 +6,10 @@ const {
 
 module.exports = {
   askQuestion: (req, res) => {
-    const { user_id, title, question, time } = req.body;
+    const { title, question, time } = req.body;
 
     //validation
-    if (!user_id || !title || !question || !time)
+    if (!title || !question)
       return res
         .status(400)
         .json({ msg: "Not all fields have been provided!" });
@@ -19,7 +19,7 @@ module.exports = {
         .json({ msg: "Title length can not be greater than 200!" });
 
     //sending data to profile with the user_id included in req.body
-    askQuestion(req.body, (err, results) => {
+    askQuestion(req, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ msg: "database connection err" });
@@ -52,7 +52,7 @@ module.exports = {
       if (!results) {
         return res.status(404).json({ msg: "Record not found" });
       } else {
-        return res.status(200).json({ data: results });
+        return res.status(200).json({ data: results[0] });
       }
     });
   },

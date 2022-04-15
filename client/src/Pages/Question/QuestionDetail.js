@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import "font-awesome/css/font-awesome.min.css";
@@ -10,26 +10,15 @@ function QuestionDetail({ question }) {
   const handleClick = () => {
     navigate(`/answer/${question.question_id}`);
   };
-  useEffect(() => {
-    console.log(question);
-  }, []);
   return (
     <div className="header_question">
-      <div className="question_user">
-        <CgProfile style={{ width: "80%", height: "80%" }} />
-        <div style={{ alignContent: "center" }}>
-          {question ? question.user_name + "" : "New User"}{" "}
-        </div>
+      <div className="question_user" style={{ textAlign: "center" }}>
+        <CgProfile style={{ width: "90%", height: "80%" }} />
+        <div>{question ? question.user_name + "" : "New User"} </div>
       </div>
       <div className="question_title" onClick={handleClick}>
-        <div style={{ width: "95%" }}>
-          {question ? question.title : "New Title"}
-        </div>
-        <i
-          style={{ width: "5%" }}
-          className="question_arrow fa-angle-right"
-          aria-hidden="true"
-        ></i>
+        <div>{question ? question.title : "New Title"}</div>
+        <div className="question_arrow fa-angle-right" aria-hidden="true"></div>
       </div>
     </div>
   );

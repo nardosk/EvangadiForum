@@ -7,7 +7,7 @@ import "./Answer.css";
 
 function Answer() {
   const { id } = useParams();
-
+  console.log(id);
   const [question, setQuestion] = useState(useParams());
   const [userData, setUserData] = useContext(UserContext);
   const [answers, setAnswers] = useState([]);
@@ -57,6 +57,7 @@ function Answer() {
     );
     console.log(response.data?.data);
     setQuestion(response.data?.data);
+    console.log(question);
   }
 
   async function loadAnswers() {
@@ -73,40 +74,63 @@ function Answer() {
       <br />
       <br />
       <div>
-        <h3>Questions</h3>
+        <h2>Questions</h2>
         <h4>{question ? question.title : "New Title"}</h4>
         <h5>{question ? question.question : "New Question"}</h5>
-        <h2 className="community_title">Answer From The Community</h2>
+        {answers && (
+          <h2 className="community_title">Answer From The Community</h2>
+        )}
         <div>
           {answers?.map((value, index) => {
             return <AnswerDetail answer={value} key={index} />;
           })}
         </div>
-        <div></div>
-        <div style={{ width: "100%", display: "inline-block" }}>
-          <div style={{ textAlign: "center" }}>
-            <h2 style={{ paddingTop: "100px" }}>Answer The Top Question</h2>
-            <Link style={{ textAlign: "center", width: "100%" }} to="/">
-              Go to Question Page
-            </Link>
+        <div className="container" style={{ width: "90%" }}>
+          <div
+            className="container"
+            style={{
+              paddingTop: "50px",
+              textAlign: "center",
+              fontWeight: "bold",
+            }}
+          >
+            <h2>Answer The Top Question</h2>
+            <Link to="/">Go to Question Page</Link>
           </div>
           <form method="post" onSubmit={handleSubmit}>
-            <div style={{ width: "90%" }}>
+            <div style={{ width: "100%" }}>
               <div>
-                <input
+                <textarea
                   style={{
-                    textAlignLast: "start",
-                    height: "150px",
+                    marginTop: "15px",
+                    height: "200px",
                     width: "100%",
+                    borderRadius: "10px",
+                    padding: "10px 15px",
                   }}
+                  maxLength="200"
                   type="text"
                   name="new_answer"
                   placeholder="Your Answer . . . "
                   onChange={handleChange}
                 />
               </div>
-              <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-                <button type="submit">Post Your Answer</button>
+              <div
+                style={{
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                }}
+              >
+                <button
+                  style={{
+                    padding: "10px 25px",
+                    borderRadius: "5px",
+                  }}
+                  className="btn btn-lg btn-primary"
+                  type="submit"
+                >
+                  Post Your Answer
+                </button>
               </div>
             </div>
           </form>

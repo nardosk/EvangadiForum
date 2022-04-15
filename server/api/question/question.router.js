@@ -9,7 +9,7 @@ const {
 } = require("./question.controller");
 
 //route new user to be registered using createUser controller
-router.post("/question", auth, askQuestion);
+router.post("/newquestion", auth, askQuestion);
 
 //route new user to be registered using createUser controller
 router.get("/getquestions", auth, getQuestions);

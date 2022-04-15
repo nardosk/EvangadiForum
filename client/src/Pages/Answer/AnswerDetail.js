@@ -4,21 +4,13 @@ import { CgProfile } from "react-icons/cg";
 function AnswerDetail({ answer }) {
   return (
     <div className="header_question">
-      <div className="question_user">
-        <CgProfile style={{ width: "80%", height: "80%" }} />
-        <div style={{ alignContent: "center" }}>
-          {answer ? answer.user_name + "" : "New User"}{" "}
-        </div>
+      <div className="question_user" style={{ textAlign: "center" }}>
+        <CgProfile style={{ width: "90%", height: "80%" }} />
+        <span>{answer ? answer.user_name : "Unknown User"} </span>
       </div>
-      <div className="question_title">
-        <div style={{ width: "95%" }}>
-          {answer ? answer.answer : "New Title"}
-        </div>
-        <i
-          style={{ width: "5%" }}
-          className="question_arrow fa-angle-right"
-          aria-hidden="true"
-        ></i>
+      <div className="question_title" style={{ height: "80%" }}>
+        <div> {answer ? answer.answer : "New Answer"}</div>
+        <div className="question_arrow fa-angle-right" aria-hidden="true"></div>
       </div>
     </div>
   );
