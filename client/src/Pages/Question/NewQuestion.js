@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import Axios from "../../Axios";
 import "./question.css";
 const NewQuestion = () => {
-  const [question, setQuestion] = useState(useParams());
+  const [question, setQuestion] = useState({});
   const [userData, setUserData] = useContext(UserContext);
   const axios = Axios();
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const NewQuestion = () => {
             fontWeight: "bold",
           }}
         >
-          <h3>Answer The Top Question</h3>
+          <h3>Ask a public question</h3>
           <Link to="/">Go to Question Page</Link>
         </div>
         <form method="post" onSubmit={handleSubmit}>

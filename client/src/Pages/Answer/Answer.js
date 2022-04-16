@@ -8,7 +8,7 @@ import "./Answer.css";
 function Answer() {
   const { id } = useParams();
   console.log(id);
-  const [question, setQuestion] = useState(useParams());
+  const [question, setQuestion] = useState({});
   const [userData, setUserData] = useContext(UserContext);
   const [answers, setAnswers] = useState([]);
   const axios = Axios();
@@ -39,6 +39,8 @@ function Answer() {
           answer_id: postRes.data.insertId,
         },
       ]);
+      //
+      setForm();
     } catch (err) {
       console.log("problem", err.response.data.msg);
       alert(err.response.data.msg);
@@ -55,9 +57,7 @@ function Answer() {
       `/api/question/getquestionbyid?question_id=${id}`,
       userData.config
     );
-    console.log(response.data?.data);
     setQuestion(response.data?.data);
-    console.log(question);
   }
 
   async function loadAnswers() {

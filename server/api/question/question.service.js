@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
   //data comes form the user controller
   askQuestion: (data, callback) => {
-    //inserting data to registration table
+    //inserting data to question table
     pool.query(
       `INSERT INTO question(user_id, title, question,time )VALUES(?,?,?,?)`,
       // ? it is hold  it help sql injections

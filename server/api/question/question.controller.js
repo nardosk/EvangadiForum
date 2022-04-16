@@ -6,7 +6,7 @@ const {
 
 module.exports = {
   askQuestion: (req, res) => {
-    const { title, question, time } = req.body;
+    const { title, question } = req.body;
 
     //validation
     if (!title || !question)
@@ -16,9 +16,9 @@ module.exports = {
     if (title.length > 200)
       return res
         .status(400)
-        .json({ msg: "Title length can not be greater than 200!" });
+        .json({ msg: "Title length can not be greater than 200 characters!" });
 
-    //sending data to profile with the user_id included in req.body
+    //sending data to question with the user_id included in req.body
     askQuestion(req, (err, results) => {
       if (err) {
         console.log(err);
