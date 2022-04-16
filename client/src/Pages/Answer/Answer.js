@@ -39,8 +39,7 @@ function Answer() {
           answer_id: postRes.data.insertId,
         },
       ]);
-      //
-      setForm();
+      e.target.reset();
     } catch (err) {
       console.log("problem", err.response.data.msg);
       alert(err.response.data.msg);

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import Axios from "../../Axios";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +7,8 @@ function Login({ changeForm }) {
   const [userData, setUserData] = useContext(UserContext);
   const axios = Axios();
   const navigate = useNavigate();
-
   const [form, setForm] = useState({});
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -36,8 +36,8 @@ function Login({ changeForm }) {
       //navigate user to homepage
       navigate("/");
     } catch (err) {
-      console.log("problem", err.response.data.msg);
-      alert(err.response.data.msg);
+      console.log("Error :" + err.response.data.msg);
+      alert("Error :" + err.response.data.msg);
     }
   };
 
@@ -64,6 +64,7 @@ function Login({ changeForm }) {
           <form
             name="loginForm"
             className="loginForm"
+            href="/"
             method="POST"
             onSubmit={handleSubmit}
           >

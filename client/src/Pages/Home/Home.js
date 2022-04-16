@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import QuestionDetail from "../Question/QuestionDetail";
 import Axios from "../../Axios";
 
-const Home = ({ logout }) => {
+const Home = () => {
   const [userData, setUserData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Home = ({ logout }) => {
   };
 
   return (
-    <section className="container">
+    <section className="bg container">
       <div className="header_row">
         <button className="blue_button" onClick={handleClick}>
           Ask Question

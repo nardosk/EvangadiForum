@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import "./SignIn.css";
@@ -17,7 +17,7 @@ function SignIn() {
 
   useEffect(() => {
     if (userData.user) navigate("/");
-  }, [userData.user, navigate]);
+  }, [userData.user]);
 
   return (
     <section id="home" className="hero">

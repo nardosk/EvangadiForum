@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../Axios";
 import { UserContext } from "../../context/UserContext";
@@ -20,7 +20,7 @@ const SignUp = ({ changeForm }) => {
       await axios.post("/api/users", form);
 
       //once registered the login automatically so send the new user info to be logged in
-      const loginRes = await axios.get("/api/users/login", {
+      const loginRes = await axios.post("/api/users/login", {
         email: form.email,
         password: form.password,
       });
@@ -39,13 +39,12 @@ const SignUp = ({ changeForm }) => {
 
       //navigate to homepage once the user is signed up
       navigate("/");
-    } catch (error) {
-      alert("problem ==>", error.response.data.msg);
+    } catch (err) {
+      console.log("Error : " + err.response.data.msg);
+      alert("Error : " + err.response.data.msg);
     }
   };
-  useEffect(() => {
-    console.log("SignUp Page Mounted");
-  }, []);
+
   return (
     <div className="authfy-panel panel-signup text-center active">
       <div className="row">
@@ -54,7 +53,7 @@ const SignUp = ({ changeForm }) => {
             <h3 className="auth-title">Join the network</h3>
             <p>
               Already have an account?
-              <a className="lnk-toggler" data-panel=".panel-login" href="#">
+              <a className="lnk-toggler" data-panel=".panel-login" href="/">
                 Sign in
               </a>
             </p>
@@ -63,7 +62,7 @@ const SignUp = ({ changeForm }) => {
           <form
             name="signupForm"
             className="signupForm"
-            href="#"
+            href="/"
             method="POST"
             onSubmit={handleSubmit}
           >
@@ -74,7 +73,7 @@ const SignUp = ({ changeForm }) => {
                     type="email"
                     className="form-control eva_email"
                     name="email"
-                    placeholder="Email address"
+                    placeholder="Email Address"
                     onChange={handleChange}
                   />
                   <span className="focus-input"></span>
@@ -86,7 +85,7 @@ const SignUp = ({ changeForm }) => {
                     type="text"
                     className="form-control eva_lastname"
                     name="userName"
-                    placeholder="User name"
+                    placeholder="User Name"
                     onChange={handleChange}
                   />
                   <span className="focus-input"></span>

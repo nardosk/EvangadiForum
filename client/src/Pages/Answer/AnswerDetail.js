@@ -10,7 +10,6 @@ function AnswerDetail({ answer }) {
       </div>
       <div className="question_title" style={{ height: "80%" }}>
         <div> {answer ? answer.answer : "New Answer"}</div>
-        <div className="question_arrow fa-angle-right" aria-hidden="true"></div>
       </div>
     </div>
   );

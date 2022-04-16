@@ -19,7 +19,7 @@ module.exports = {
   getQuestions: (callback) => {
     //getting the question list by user_id
     pool.query(
-      `SELECT question.question_id, registration.user_id, registration.user_name, question.title, question.question, question.time  FROM question LEFT OUTER JOIN registration ON question.user_id = registration.user_id`,
+      `SELECT question.question_id, registration.user_id, registration.user_name, question.title, question.question, question.time  FROM question LEFT OUTER JOIN registration ON question.user_id = registration.user_id  order by question.time desc`,
       (err, result) => {
         if (err) {
           return callback(err);

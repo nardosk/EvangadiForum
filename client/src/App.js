@@ -11,6 +11,7 @@ import Footer from "./Pages/Footer/Footer";
 import Login from "./Pages/SignIn/SignIn";
 import NewQuestion from "./Pages/Question/NewQuestion";
 import Answer from "./Pages/Answer/Answer";
+import NotFound from "./Pages/NotFound/NotFound";
 function App() {
   const [userData, setUserData] = useContext(UserContext);
   const axios = Axios();
@@ -42,16 +43,6 @@ function App() {
     }
   };
 
-  const logout = () => {
-    //set global state to undefined will logout the user
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-    //resetting localStorage
-    localStorage.setItem("auth-token", "");
-  };
-
   useEffect(() => {
     //check if the user is logged in
     checkLoggedIn();
@@ -59,14 +50,13 @@ function App() {
   return (
     <Router>
       <div>
-        <Header logout={logout} />
+        <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/newquestion" element={<NewQuestion />} />
           <Route path="/answer/:id" element={<Answer />} />
-
-          {/* passing logout function as props to Home page */}
-          <Route path="/" element={<Home logout={logout} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>

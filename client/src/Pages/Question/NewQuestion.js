@@ -33,8 +33,8 @@ const NewQuestion = () => {
         question: form.question,
         time: new Date(),
       });
-      console.log(question);
       alert("New Question Added!");
+      e.target.reset();
       navigate("/");
     } catch (err) {
       console.log("problem", err.response.data.msg);

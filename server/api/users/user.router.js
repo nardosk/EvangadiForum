@@ -1,10 +1,9 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
 //importing auth middleware
-const auth = require('../middleware/auth');
+const auth = require("../middleware/auth");
 
-
-const { createUser, getUserById, login } = require('./user.controller');
+const { createUser, getUserById, login } = require("./user.controller");
 
 //route new user to be registered using createUser controller
 router.post("/", createUser);

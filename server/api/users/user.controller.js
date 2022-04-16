@@ -18,7 +18,6 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   createUser: (req, res) => {
     const { userName, firstName, lastName, email, password } = req.body;
-    console.log(req.body);
     //validation
     if (!userName || !firstName || !lastName || !email || !password)
       return res
@@ -28,64 +27,45 @@ module.exports = {
       return res
         .status(400)
         .json({ msg: "Password must be at least 8 characters!" });
-    pool.query(
-      "SELECT * FROM registration WHERE user_email = ?",
-      [email],
-      (err, results) => {
-        if (err) {
-          return res.status(err).json({ msg: "database connection err" });
-        }
-        if (results.length > 0) {
-          return res
-            .status(400)
-            .json({ msg: "An account with this email already exists!" });
-        } else {
-          //password encryption
-          const salt = bcrypt.genSaltSync();
 
-          //changing the value of password from req.body with the encrypted password
-          req.body.password = bcrypt.hashSync(password, salt);
+    return getUserByEmail(email, (err, results) => {
+      if (err) {
+        res.status(500).json({ msg: "database connection err" });
+      }
+      if (results) {
+        return res
+          .status(400)
+          .json({ msg: "An account with this email already exists!" });
+      } else {
+        //password encryption
+        const salt = bcrypt.genSaltSync();
 
-          //sending data to register
-          register(req.body, (err, results) => {
+        //changing the value of password from req.body with the encrypted password
+        req.body.password = bcrypt.hashSync(password, salt);
+
+        //sending data to register
+        register(req.body, (err, results) => {
+          if (err) {
+            if (err.code == "ER_DUP_ENTRY") {
+              return res.status(500).json({ msg: err.sqlMessage });
+            }
+            return res.status(500).json({ msg: "database connection err" });
+          }
+          req.body.userId = results.insertId;
+          //sending data to profile with the user_id included in req.body
+          profile(req.body, (err, results) => {
             if (err) {
               console.log(err);
               return res.status(500).json({ msg: "database connection err" });
             }
-
-            //before registration finish, we need to get the user_id from the database accessing through email
-            pool.query(
-              "SELECT * FROM registration WHERE user_email = ?",
-              [email],
-              (err, results) => {
-                if (err) {
-                  return res
-                    .status(err)
-                    .json({ msg: "database connection err" });
-                }
-
-                //adding user_id to req.body
-                req.body.userId = results[0].user_id;
-
-                //sending data to profile with the user_id included in req.body
-                profile(req.body, (err, results) => {
-                  if (err) {
-                    console.log(err);
-                    return res
-                      .status(500)
-                      .json({ msg: "database connection err" });
-                  }
-                  return res.status(200).json({
-                    msg: "New user added successfully",
-                    data: results,
-                  });
-                });
-              }
-            );
           });
-        }
+          return res.status(200).json({
+            msg: "New user added successfully!",
+            data: results,
+          });
+        });
       }
-    );
+    });
   },
   getUserById: (req, res) => {
     //getting req.id from auth middleware
