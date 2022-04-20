@@ -1,6 +1,6 @@
 import React from "react";
 
-function ForgotPassword() {
+function ForgotPassword({ showSignIn, showSignUp }) {
   return (
     <div className="authfy-panel panel-forgot active">
       <div className="row">
@@ -33,12 +33,22 @@ function ForgotPassword() {
                 </button>
               </div>
               <div className="form-group">
-                <a className="lnk-toggler" data-panel=".panel-login" href="#">
+                <a
+                  className="lnk-toggler"
+                  data-panel=".panel-login"
+                  href="#"
+                  onClick={showSignIn}
+                >
                   Already have an account?
                 </a>
               </div>
               <div className="form-group">
-                <a className="lnk-toggler" data-panel=".panel-signup" href="#">
+                <a
+                  className="lnk-toggler"
+                  data-panel=".panel-signup"
+                  href="#"
+                  onClick={showSignUp}
+                >
                   Don’t have an account?
                 </a>
               </div>

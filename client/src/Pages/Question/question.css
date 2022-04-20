@@ -24,20 +24,22 @@
 }
 .question_user {
   display: inline-block;
-  width: 12%;
+  width: 10%;
+  margin: auto;
   align-items: center;
 }
 .question_title {
-  display: flex;
   width: 100%;
   height: 100%;
-  /* border: 3px solid green; */
+  display: flex;
   margin: auto;
   justify-content: space-between;
 }
-.question_arrow {
-  content: "\f105";
+.question_content {
+  width: 95%;
+  height: 100%;
 }
-.fa-angle-right:before {
-  content: "\f105";
+.question_arrow {
+  width: 5%;
+  height: 100%;
 }

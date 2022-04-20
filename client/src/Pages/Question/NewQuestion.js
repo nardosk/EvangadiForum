@@ -33,7 +33,6 @@ const NewQuestion = () => {
         question: form.question,
         time: new Date(),
       });
-      alert("New Question Added!");
       e.target.reset();
       navigate("/");
     } catch (err) {
@@ -57,11 +56,10 @@ const NewQuestion = () => {
         <h3>Steps to write a good question</h3>
       </div>
       <div
+        className="container"
         style={{
-          textAlign: "center",
+          width: "40%",
           margin: "auto",
-          display: "flex",
-          flexDirection: "column",
         }}
       >
         <li>Summerize your in a one-line title.</li>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "../../Axios";
 import { UserContext } from "../../context/UserContext";
 
-const SignUp = ({ changeForm }) => {
+const SignUp = ({ showSignIn }) => {
   const [form, setForm] = useState({});
   const navigate = useNavigate();
   const axios = Axios();
@@ -52,8 +52,13 @@ const SignUp = ({ changeForm }) => {
           <div className="authfy-heading">
             <h3 className="auth-title">Join the network</h3>
             <p>
-              Already have an account?
-              <a className="lnk-toggler" data-panel=".panel-login" href="/">
+              {"Already have an account? "}
+              <a
+                className="lnk-toggler"
+                data-panel=".panel-login"
+                href="#"
+                onClick={showSignIn}
+              >
                 Sign in
               </a>
             </p>
@@ -154,7 +159,12 @@ const SignUp = ({ changeForm }) => {
               </button>
             </div>
           </form>
-          <a className="lnk-toggler" data-panel=".panel-login" href="/">
+          <a
+            className="lnk-toggler"
+            data-panel=".panel-login"
+            href=""
+            onClick={showSignIn}
+          >
             Already have an account?
           </a>
         </div>

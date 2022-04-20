@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserContext";
 import Axios from "../../Axios";
 import { useNavigate } from "react-router-dom";
 
-function Login({ changeForm }) {
+function Login({ showSignUp, showForgot }) {
   const [userData, setUserData] = useContext(UserContext);
   const axios = Axios();
   const navigate = useNavigate();
@@ -46,12 +46,12 @@ function Login({ changeForm }) {
       <div className="authfy-heading">
         <h3 className="auth-title">Login to your account</h3>
         <p>
-          Don’t have an account?
+          {"Don’t have an account? "}
           <a
             className="lnk-toggler"
             data-panel=".panel-signup"
             href="#"
-            onClick={changeForm}
+            onClick={showSignUp}
           >
             Create a new account
           </a>
@@ -99,6 +99,7 @@ function Login({ changeForm }) {
                     className="lnk-toggler"
                     data-panel=".panel-forgot"
                     href="#"
+                    onClick={showForgot}
                   >
                     Forgot password?
                   </a>
