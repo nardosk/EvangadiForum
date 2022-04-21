@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import Axios from "../../Axios";
 import "./question.css";
 const NewQuestion = () => {
-  const [question, setQuestion] = useState({});
-  const [userData, setUserData] = useContext(UserContext);
+  const [userData] = useContext(UserContext);
   const axios = Axios();
   const navigate = useNavigate();
 
@@ -17,7 +16,7 @@ const NewQuestion = () => {
     e.preventDefault();
     try {
       //sending user data to database to be logged in
-      const postRes = await axios.post(
+      await axios.post(
         "/api/question/newquestion",
         {
           title: form.title,
@@ -25,14 +24,6 @@ const NewQuestion = () => {
         },
         userData.config
       );
-      setQuestion({
-        question_id: postRes.data.insertId,
-        user_id: userData.id,
-        user_name: userData.display_name,
-        title: form.title,
-        question: form.question,
-        time: new Date(),
-      });
       e.target.reset();
       navigate("/");
     } catch (err) {
@@ -42,30 +33,15 @@ const NewQuestion = () => {
   };
 
   return (
-    <section className="container">
-      <br />
-      <br />
-      <br />
-      <br />
-      <div
-        style={{
-          textAlign: "center",
-          display: "block",
-        }}
-      >
+    <section className="container" style={{ paddingTop: "100px" }}>
+      <div className="d-flex flex-column align-items-center my-5">
         <h3>Steps to write a good question</h3>
-      </div>
-      <div
-        className="container"
-        style={{
-          width: "40%",
-          margin: "auto",
-        }}
-      >
-        <li>Summerize your in a one-line title.</li>
-        <li>Describe your problem in more detail.</li>
-        <li>Describe what you tried and what you expected to happen.</li>
-        <li>Review your question and post it to the site.</li>
+        <ul style={{ fontSize: "large", alignItems: "baseline" }}>
+          <li>Summerize your in a one-line title.</li>
+          <li>Describe your problem in more detail.</li>
+          <li>Describe what you tried and what you expected to happen.</li>
+          <li>Review your question and post it to the site.</li>
+        </ul>
       </div>
       <div className="container" style={{ width: "90%" }}>
         <div

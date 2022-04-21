@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 function ForgotPassword({ showSignIn, showSignUp }) {
+  const [reset, setReset] = useState(false);
+  const [form, setForm] = useState({});
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="authfy-panel panel-forgot active">
       <div className="row">
@@ -21,6 +27,7 @@ function ForgotPassword({ showSignIn, showSignUp }) {
                   className="form-control"
                   name="emailaddress"
                   placeholder="Email address"
+                  onChange={handleChange}
                 ></input>
                 <span className="focus-input"></span>
               </div>
@@ -28,6 +35,12 @@ function ForgotPassword({ showSignIn, showSignUp }) {
                 <button
                   className="btn btn-lg btn-primary btn-block"
                   type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    form.emailaddress
+                      ? setReset(true)
+                      : alert("Please enter your email first!");
+                  }}
                 >
                   Reset your password
                 </button>
@@ -54,15 +67,16 @@ function ForgotPassword({ showSignIn, showSignUp }) {
               </div>
             </form>
           </div>
-
-          <div className="reset-link-sent">
-            <div className="authfy-heading">
-              <h3 className="auth-title">
-                Reset instruction is sent to your email
-              </h3>
-              <h4>Please check your email to reset your password.</h4>
+          {reset && (
+            <div className="reset-link-sent">
+              <div className="authfy-heading">
+                <h3 className="auth-title">
+                  Reset instruction is sent to your email
+                </h3>
+                <h4>Please check your email to reset your password.</h4>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

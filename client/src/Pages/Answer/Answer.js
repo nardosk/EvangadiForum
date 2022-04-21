@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import Axios from "../../Axios";
 import AnswerDetail from "./AnswerDetail";
@@ -9,7 +9,7 @@ function Answer() {
   const { id } = useParams();
   console.log(id);
   const [question, setQuestion] = useState({});
-  const [userData, setUserData] = useContext(UserContext);
+  const [userData] = useContext(UserContext);
   const [answers, setAnswers] = useState([]);
   const axios = Axios();
 
@@ -49,7 +49,7 @@ function Answer() {
   useEffect(() => {
     loadQuestion();
     loadAnswers();
-  }, [userData.user]);
+  }, []);
 
   async function loadQuestion() {
     const response = await axios.get(
@@ -76,7 +76,7 @@ function Answer() {
         <h2>Questions</h2>
         <h4>{question ? question.title : "New Title"}</h4>
         <h5>{question ? question.question : "New Question"}</h5>
-        {answers && (
+        {answers.length > 0 && (
           <h2 className="community_title">Answer From The Community</h2>
         )}
         <div>

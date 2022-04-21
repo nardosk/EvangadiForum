@@ -6,7 +6,7 @@ import Axios from "../../Axios";
 import "./home.css";
 
 const Home = () => {
-  const [userData, setUserData] = useContext(UserContext);
+  const [userData] = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
   const axios = Axios();
